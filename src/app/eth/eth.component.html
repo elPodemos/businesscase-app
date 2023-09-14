@@ -1,0 +1,14 @@
+<h1>Eth</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let eth of ethList" class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ eth.id }}</h5>
+                <p>{{ eth.price }}</p>
+                <p>{{ eth.date }}</p>
+                <button (click)="deleteEth(eth.id)" type="button" class="btn btn-danger">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
