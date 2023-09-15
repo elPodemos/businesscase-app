@@ -1,14 +1,29 @@
 <h1>Eth</h1>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div *ngFor="let eth of ethList" class="col">
+    <div *ngFor="let eth of ethList; let index = index" class="col">
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">{{ eth.id }}</h5>
                 <p>{{ eth.price }}</p>
-                <p>{{ eth.date }}</p>
-                <button (click)="deleteEth(eth.id)" type="button" class="btn btn-danger">Supprimer</button>
+                <p>{{ eth.date | date}}</p>
+                <button (click)="deleteEth(eth.id, index)" type="button" class="btn btn-danger">Supprimer</button>
             </div>
         </div>
     </div>
+</div>
+
+<div class="container">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un ETH</h1>
+
+    <br>
+    <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm)">
+        <div class="mb-3">
+            <input placeholder="price" type="number" class="form-control" name="price" ngModel required>
+        </div>
+        <div class="mb-3">
+            <input placeholder="date" type="date" class="form-control" name="date" ngModel required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>

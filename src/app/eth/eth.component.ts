@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from "@angular/forms";
 import { EthService } from '../service/eth.service';
 import { EthInterface } from '../interface/eth.interface';
 
@@ -17,15 +18,25 @@ export class EthComponent implements OnInit {
 
     ngOnInit(): void {
 
-      this.service.getEth().subscribe(data => {
-        this.ethList = data;
-        console.table(this.ethList);
-      });
+      this.getEth();
 
     }
 
-    deleteEth(id:number){
+    getEth(){
+      this.service.getEth().subscribe(data => {
+        this.ethList = data;
+      });
+    }
+
+    deleteEth(id:number, index:number){
       this.service.deleteEth(id).subscribe(data => {
+        this.ethList?.splice(index, 1);
+      });
+    }
+
+    onSubmit(form: NgForm){
+      this.service.addEth(form.value).subscribe(data => {
+        this.getEth();
       });
     }
 
